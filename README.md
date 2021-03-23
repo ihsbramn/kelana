@@ -6,6 +6,15 @@ Kelana.co.id merupakan aplikasi penyedia informasi bagi para backpacker. dengan 
 
 Project Capstone
 
+## How to Clone
+
+- Create Database : kelana_db
+- composer install
+- config .env file
+- seed database for admin account using :
+  php artisan db:seed --class=DatabaseSeeder
+  
+
 ## Update Notes
 
 ```bash
@@ -17,12 +26,4 @@ landing page
 login page
 regis page
 ______________________________________
-
-## How to Clone
-
-- Create Database : kelana_db
-- composer install
-- config .env file
-- seed database for admin account using :
-  php artisan db:seed --class=DatabaseSeeder
 
