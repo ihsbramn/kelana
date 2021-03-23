@@ -69,7 +69,11 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         @if (Route::has('login'))
                             @auth
-                                <li><a class="dropdown-item" href="{{ url('/home') }}">Home</a></li>
+                                @if (auth()->user()->is_admin == 1)
+                                    <li><a class="dropdown-item" href="{{ url('admin') }}">Home</a></li>
+                                @else
+                                    <li><a class="dropdown-item" href="{{ url('user') }}">Home</a></li>
+                                @endif
                             @else
                                 <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
                                 @if (Route::has('register'))

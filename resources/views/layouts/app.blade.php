@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Kelana | Ubah Wacana Menjadi Kelana') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -49,19 +49,25 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mx-auto">
                         <li class=" nav-item">
-                            <a class="nav-link" href="#">Home</a>
+                            @auth
+                                @if (auth()->user()->is_admin == 1)
+                            <li><a class="nav-link" href="{{ url('admin') }}">Home</a></li>
+                        @else
+                            <li><a class="nav-link" href="{{ url('user') }}">Home</a></li>
+                            @endif
+                        @endauth
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Story</a>
+                            <a class="nav-link" href="{{ url('/story') }}">Story</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Explore</a>
+                            <a class="nav-link" href="{{ url('/explore') }}">Explore</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Merchant</a>
+                            <a class="nav-link" href="{{ url('/merchant') }}">Merchant</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Teman Kelana</a>
+                            <a class="nav-link" href="{{ url('/temankelana') }}">Teman Kelana</a>
                         </li>
                     </ul>
 
@@ -90,7 +96,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                         document.getElementById('logout-form').submit();">
+                                                                            document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -105,9 +111,20 @@
             </div>
         </nav>
 
+
         <main class="py-4">
             @yield('content')
         </main>
+        <!-- Footer -->
+        <!-- Copyright -->
+        <div class="text-center p-3"">
+                © 2021 Copyright
+                <a class=" text-dark" href="{{ url('/') }}">Kelana.co.id</a>
+        </div>
+        <!-- Copyright -->
+        </footer>
+        <!-- Footer -->
+
     </div>
 </body>
 
