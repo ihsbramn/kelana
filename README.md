@@ -8,8 +8,6 @@ Project Capstone
 
 ## Update Notes
 
-<b> LARAVEL 8 </b>
-
 ```bash
 ______________________________________
 Multi Auth 
