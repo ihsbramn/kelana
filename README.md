@@ -18,3 +18,14 @@ login page
 regis page
 ______________________________________
 
+## How to Clone
+
+```bash
+______________________________________
+- Create Database : kelana_db
+- composer install
+- config .env file
+- seed database for admin account using :
+  php artisan db:seed --class=DatabaseSeeder
+______________________________________
+
