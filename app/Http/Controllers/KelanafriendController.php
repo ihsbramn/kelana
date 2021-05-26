@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Food;
+use App\Models\Kelanafriend;
 use Illuminate\Http\Request;
 
-class FoodController extends Controller
+class KelanafriendController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,10 @@ class FoodController extends Controller
      */
     public function index()
     {
-        $food = \App\Models\Food::all();
-        return view('food.index', compact('food'));
+        $kelanafriend = \App\Models\Kelanafriend::all();
+        return view('temankelana.index', compact('kelanafriend'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -25,7 +26,7 @@ class FoodController extends Controller
      */
     public function create()
     {
-        //
+        return view('temankelana.create');
     }
 
     /**
@@ -37,46 +38,45 @@ class FoodController extends Controller
     public function store(Request $request)
     {
         $request->validate(([
-            'food_img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5048',
+            'friend_img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5048',
         ]));
 
-        // $imgName = time() . '.' . request()->image->getClientOriginalExtension();
 
-        $image = $request->file('food_img');
+        $image = $request->file('friend_img');
         $destinationPath = public_path('/images');
         $imgName = time() . '.' . $image->getClientOriginalExtension();
         $image->move($destinationPath, $imgName);
 
-        // $request->story_img->move(public_path('images'), $imgName);
+        Kelanafriend::create([
+            'friend_name' => $request->friend_name,
+            'friend_location' => $request->friend_location,
+            'friend_instagram' => $request->friend_instagram,
+            'friend_whatsapp' => $request->friend_whatsapp,
+            'friend_img' => $imgName,
 
-        Food::create([
-            'food_title' => $request->food_title,
-            'food_date' => $request->food_date,
-            'food_description' => $request->food_description,
-            'food_img' => $imgName,
         ]);
+
+        return redirect('temankelana');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Food  $food
+     * @param  \App\Models\Kelanafriend  $kelanafriend
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Kelanafriend $kelanafriend)
     {
         //
-        $food = Food::find($id);
-        return view('food.show', compact('food'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Food  $food
+     * @param  \App\Models\Kelanafriend  $kelanafriend
      * @return \Illuminate\Http\Response
      */
-    public function edit(Food $food)
+    public function edit(Kelanafriend $kelanafriend)
     {
         //
     }
@@ -85,10 +85,10 @@ class FoodController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Food  $food
+     * @param  \App\Models\Kelanafriend  $kelanafriend
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Food $food)
+    public function update(Request $request, Kelanafriend $kelanafriend)
     {
         //
     }
@@ -96,10 +96,10 @@ class FoodController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Food  $food
+     * @param  \App\Models\Kelanafriend  $kelanafriend
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Food $food)
+    public function destroy(Kelanafriend $kelanafriend)
     {
         //
     }
