@@ -2,10 +2,10 @@
 
 @section('content')
     <div class="jumbotron text-white" style="background-image: url('{{ url('images/landing1.jpg') }}') ;
-        height: 100vh; background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        ">
+            height: 100vh; background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            ">
         <br><br><br><br>
         <br><br><br><br>
         <br><br><br><br>

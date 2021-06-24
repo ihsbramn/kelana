@@ -25,7 +25,7 @@ class HotelController extends Controller
      */
     public function create()
     {
-        //
+        return view('hotel.create');
     }
 
     /**
@@ -50,9 +50,12 @@ class HotelController extends Controller
         // $request->story_img->move(public_path('images'), $imgName);
 
         Hotel::create([
-            'hotel_title' => $request->hotel_title,
+            'hotel_name' => $request->hotel_name,
             'hotel_date' => $request->hotel_date,
             'hotel_description' => $request->hotel_description,
+            'hotel_location' => $request->hotel_location,
+            'hotel_price' => $request->hotel_price,
+            'hotel_contact' => $request->hotel_contact,
             'hotel_img' => $imgName,
         ]);
 
@@ -67,7 +70,7 @@ class HotelController extends Controller
      */
     public function show(Hotel $hotel)
     {
-        //
+        return view('hotel.show', compact('hotel'));
     }
 
     /**
@@ -102,5 +105,27 @@ class HotelController extends Controller
     public function destroy(Hotel $hotel)
     {
         //
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+
+        $hotel = hotel::query()
+            ->where('hotel_title', 'LIKE', "%{$search}%")
+            ->get();
+
+        return view('hotel.index', compact('hotel'));
+    }
+
+    public function filter(Request $request)
+    {
+        $filter = $request->input('filterLocation');
+
+        $hotel = hotel::query()
+            ->where('hotel_location', 'LIKE', "%{$filter}%")
+            ->get();
+
+        return view('hotel.index', compact('hotel'));
     }
 }

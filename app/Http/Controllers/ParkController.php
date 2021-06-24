@@ -25,7 +25,7 @@ class ParkController extends Controller
      */
     public function create()
     {
-        //
+        return view('park.create');
     }
 
     /**
@@ -50,9 +50,12 @@ class ParkController extends Controller
         // $request->story_img->move(public_path('images'), $imgName);
 
         Park::create([
-            'park_title' => $request->park_title,
+            'park_name' => $request->park_name,
             'park_date' => $request->park_date,
             'park_description' => $request->park_description,
+            'park_price' => $request->park_price,
+            'park_location' => $request->park_location,
+            'park_contact' => $request->park_contact,
             'park_img' => $imgName,
         ]);
 
@@ -110,6 +113,17 @@ class ParkController extends Controller
 
         $park = Park::query()
             ->where('park_title', 'LIKE', "%{$search}%")
+            ->get();
+
+        return view('park.index', compact('park'));
+    }
+
+    public function filter(Request $request)
+    {
+        $filter = $request->input('filterLocation');
+
+        $park = Park::query()
+            ->where('park_location', 'LIKE', "%{$filter}%")
             ->get();
 
         return view('park.index', compact('park'));
